@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Config"
+    targetNamespace="http://tempuri.org/Config.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/Config.xsd"
+    xmlns:mstns="http://tempuri.org/Config.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:annotation>
+    <xs:documentation xml:lang="en">XML Schema file for the configuration validation</xs:documentation>
+  </xs:annotation>
+  <xs:complexType name="account_format">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Account format definition</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!--name-->
+      <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The name of the account</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!--type-->
+      <xs:element name="Type">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Account type</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="moodle">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">Moodle account type</xs:documentation>
+              </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="twitter">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">Twitter account type</xs:documentation>
+              </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="email">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">EMail account type</xs:documentation>
+              </xs:annotation>
+            </xs:enumeration>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <!--enabled-->
+      <xs:element name="Enabled" type="xs:boolean" default="false">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">the state of the account</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!--option(s)-->
+      <xs:element name="Option" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Extra account configuration options</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="name" type="xs:string" use="required">
+                <xs:annotation>
+                  <xs:documentation xml:lang="en">The name of the option</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <!--lastUpdate-->
+      <xs:element name="LastUpdate" type="xs:dateTime" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Date of the last account sincronization</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      
+    </xs:sequence>
+    <!--id atribute-->
+    <xs:attribute name="id" type="xs:positiveInteger" use="required">
+      <xs:annotation>
+        <xs:documentation xml:lang="en">Account ID</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    
+  </xs:complexType>
+  
+  
+  <!-- configuration element definition -->
+  <xs:element name="Config">
+    <xs:complexType>
+      <xs:sequence>
+        <!--users-->
+        <xs:element name="Users">
+          <xs:complexType>
+            <xs:sequence minOccurs="0" maxOccurs="unbounded">
+              <!--user-->
+              <xs:element name="User">
+                <xs:complexType>
+                  <xs:sequence>
+                    <!--username-->
+                    <xs:element name="Username" type="xs:string">
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">Username for the application user</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                    <!--password-->
+                    <xs:element name="Password" type="xs:string">
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">Password for the application user</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                    <!--accounts-->
+                    <xs:element name="Accounts">
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">The user accounts</xs:documentation>
+                      </xs:annotation>
+                      <xs:complexType>
+                        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                          <!--account-->
+                          <xs:element name="Account" type="account_format">
+                            <xs:annotation>
+                              <xs:documentation xml:lang="en">Account definition</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+
+                      <!-- unique account identifier restrition -->
+                      <xs:unique name="uniqueUserAccountId">
+                        <xs:selector xpath="mstns:Account" />
+                        <xs:field xpath="@id" />
+                      </xs:unique>
+                    </xs:element>
+                  </xs:sequence>
+                  <!--id atribute-->
+                  <xs:attribute name="id" type="xs:positiveInteger" use="required">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="en">User account ID</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <!--defaultUser atribute-->
+            <xs:attribute name="defaultUser" type="xs:positiveInteger" use="optional">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">User ID for the default application user</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+
+    <!-- default user key relation -->
+    <xs:key name="userIdKey">
+      <xs:selector xpath="mstns:Users/mstns:User" />
+      <xs:field xpath="@id" />
+    </xs:key>
+    <xs:keyref name="userIdKeyRef" refer="userIdKey">
+      <xs:selector xpath="mstns:Users" />
+      <xs:field xpath="@defaultUser" />
+    </xs:keyref>
+  </xs:element>
+</xs:schema>

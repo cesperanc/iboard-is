@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd1="http://ead.ipleiria.pt/admin/report/uedws/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:impl="http://ead.ipleiria.pt/admin/report/uedws/" xmlns:tns="http://ead.ipleiria.pt/admin/report/uedws/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="UEDWS" targetNamespace="http://ead.ipleiria.pt/admin/report/uedws/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types xmlns="http://schemas.xmlsoap.org/wsdl/">
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://ead.ipleiria.pt/admin/report/uedws/">
+      <xsd:complexType name="UedCredentials">
+        <xsd:sequence>
+          <xsd:element name="username" type="xsd:string" />
+          <xsd:element name="autorizationKey" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="UedDate">
+        <xsd:sequence>
+          <xsd:element name="hour" type="xsd:string" />
+          <xsd:element name="minute" type="xsd:string" />
+          <xsd:element name="second" type="xsd:string" />
+          <xsd:element name="day" type="xsd:string" />
+          <xsd:element name="month" type="xsd:string" />
+          <xsd:element name="year" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfUedCourse">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="tns:UedCourse[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="UedCourse">
+        <xsd:sequence>
+          <xsd:element name="id" type="xsd:int" />
+          <xsd:element name="shortName" type="xsd:string" />
+          <xsd:element name="idNumber" type="xsd:int" />
+          <xsd:element name="category" type="xsd:int" />
+          <xsd:element name="fullName" type="xsd:string" />
+          <xsd:element name="visible" type="xsd:int" />
+          <xsd:element name="newsItems" type="xsd:string" />
+          <xsd:element name="fullLink" type="xsd:string" />
+          <xsd:element name="startDate" type="tns:UedDate" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfUedRecentEnrolment">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="tns:UedRecentEnrolment[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="UedRecentEnrolment">
+        <xsd:sequence>
+          <xsd:element name="userId" type="xsd:int" />
+          <xsd:element name="courseId" type="xsd:int" />
+          <xsd:element name="userFullName" type="xsd:string" />
+          <xsd:element name="userProfileLink" type="xsd:string" />
+          <xsd:element name="date" type="tns:UedDate" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfUedRecentModification">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="tns:UedRecentModification[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="UedRecentModification">
+        <xsd:sequence>
+          <xsd:element name="operation" type="xsd:string" />
+          <xsd:element name="text" type="xsd:string" />
+          <xsd:element name="module" type="xsd:string" />
+          <xsd:element name="modulename" type="xsd:string" />
+          <xsd:element name="url" type="xsd:string" />
+          <xsd:element name="date" type="tns:UedDate" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfUedRecentForumActivity">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="tns:UedRecentForumActivity[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="UedRecentForumActivity">
+        <xsd:sequence>
+          <xsd:element name="forumId" type="xsd:int" />
+          <xsd:element name="forumName" type="xsd:string" />
+          <xsd:element name="sectionNumber" type="xsd:int" />
+          <xsd:element name="activity" type="tns:ArrayOfUedForumActivity" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfUedForumActivity">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="tns:UedForumActivity[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="UedForumActivity">
+        <xsd:sequence>
+          <xsd:element name="discussionType" type="xsd:string" />
+          <xsd:element name="parentId" type="xsd:int" />
+          <xsd:element name="discussionId" type="xsd:int" />
+          <xsd:element name="userId" type="xsd:int" />
+          <xsd:element name="date" type="tns:UedDate" />
+          <xsd:element name="postId" type="xsd:int" />
+          <xsd:element name="postSubject" type="xsd:string" />
+          <xsd:element name="postUrl" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="UedUser">
+        <xsd:sequence>
+          <xsd:element name="id" type="xsd:int" />
+          <xsd:element name="fullName" type="xsd:string" />
+          <xsd:element name="imageUrl" type="xsd:string" />
+          <xsd:element name="description" type="xsd:string" />
+          <xsd:element name="country" type="xsd:string" />
+          <xsd:element name="city" type="xsd:string" />
+          <xsd:element name="webPageUrl" type="xsd:string" />
+          <xsd:element name="profileLink" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IsWebserviceEnabledRequest" />
+  <wsdl:message name="IsWebserviceEnabledResponse">
+    <wsdl:part name="return" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetAuthorizationKeyRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="deviceIdentification" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAuthorizationKeyResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="RevokeAuthorizationKeyRequest">
+    <wsdl:part name="credentials" type="tns:UedCredentials" />
+    <wsdl:part name="deviceIdentification" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="RevokeAuthorizationKeyResponse">
+    <wsdl:part name="return" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="ValidateCredentialsRequest">
+    <wsdl:part name="credentials" type="tns:UedCredentials" />
+  </wsdl:message>
+  <wsdl:message name="ValidateCredentialsResponse">
+    <wsdl:part name="return" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="UnixTimestampToUedDateRequest">
+    <wsdl:part name="credentials" type="tns:UedCredentials" />
+    <wsdl:part name="timeStamp" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="UnixTimestampToUedDateResponse">
+    <wsdl:part name="return" type="tns:UedDate" />
+  </wsdl:message>
+  <wsdl:message name="_uedDateToUnixTimestampRequest">
+    <wsdl:part name="credentials" type="tns:UedCredentials" />
+    <wsdl:part name="uedDate" type="tns:UedDate" />
+  </wsdl:message>
+  <wsdl:message name="_uedDateToUnixTimestampResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="UedDateToUnixTimestampRequest">
+    <wsdl:part name="credentials" type="tns:UedCredentials" />
+    <wsdl:part name="uedDate" type="tns:UedDate" />
+  </wsdl:message>
+  <wsdl:message name="UedDateToUnixTimestampResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMyCoursesRequest">
+    <wsdl:part name="credentials" type="tns:UedCredentials" />
+  </wsdl:message>
+  <wsdl:message name="GetMyCoursesResponse">
+    <wsdl:part name="return" type="tns:ArrayOfUedCourse" />
+  </wsdl:message>
+  <wsdl:message name="CanAccessToCourseRequest">
+    <wsdl:part name="credentials" type="tns:UedCredentials" />
+    <wsdl:part name="courseId" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="CanAccessToCourseResponse">
+    <wsdl:part name="return" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetCourseRecentEnrolmentsRequest">
+    <wsdl:part name="credentials" type="tns:UedCredentials" />
+    <wsdl:part name="courseId" type="xsd:int" />
+    <wsdl:part name="UedStartDate" type="tns:UedDate" />
+  </wsdl:message>
+  <wsdl:message name="GetCourseRecentEnrolmentsResponse">
+    <wsdl:part name="return" type="tns:ArrayOfUedRecentEnrolment" />
+  </wsdl:message>
+  <wsdl:message name="GetCourseRecentModificationsRequest">
+    <wsdl:part name="credentials" type="tns:UedCredentials" />
+    <wsdl:part name="courseId" type="xsd:int" />
+    <wsdl:part name="UedStartDate" type="tns:UedDate" />
+  </wsdl:message>
+  <wsdl:message name="GetCourseRecentModificationsResponse">
+    <wsdl:part name="return" type="tns:ArrayOfUedRecentModification" />
+  </wsdl:message>
+  <wsdl:message name="GetCourseRecentForumActivityRequest">
+    <wsdl:part name="credentials" type="tns:UedCredentials" />
+    <wsdl:part name="courseId" type="xsd:int" />
+    <wsdl:part name="UedStartDate" type="tns:UedDate" />
+  </wsdl:message>
+  <wsdl:message name="GetCourseRecentForumActivityResponse">
+    <wsdl:part name="return" type="tns:ArrayOfUedRecentForumActivity" />
+  </wsdl:message>
+  <wsdl:message name="GetUserPublicProfileRequest">
+    <wsdl:part name="credentials" type="tns:UedCredentials" />
+    <wsdl:part name="userId" type="xsd:int" />
+    <wsdl:part name="courseId" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="GetUserPublicProfileResponse">
+    <wsdl:part name="return" type="tns:UedUser" />
+  </wsdl:message>
+  <wsdl:message name="GetMyUserPublicProfileRequest">
+    <wsdl:part name="credentials" type="tns:UedCredentials" />
+  </wsdl:message>
+  <wsdl:message name="GetMyUserPublicProfileResponse">
+    <wsdl:part name="return" type="tns:UedUser" />
+  </wsdl:message>
+  <wsdl:message name="GetVersionRequest" />
+  <wsdl:message name="GetVersionResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:portType name="UEDWSPortType">
+    <wsdl:operation name="isWebserviceEnabled">
+      <documentation> Check is the webservice is enabled</documentation>
+      <wsdl:input message="tns:IsWebserviceEnabledRequest" />
+      <wsdl:output message="tns:IsWebserviceEnabledResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getAuthorizationKey" parameterOrder="username password deviceIdentification">
+      <documentation> Request an autorization key to the webservice using the user credentials</documentation>
+      <wsdl:input message="tns:GetAuthorizationKeyRequest" />
+      <wsdl:output message="tns:GetAuthorizationKeyResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="revokeAuthorizationKey" parameterOrder="credentials deviceIdentification">
+      <documentation> Revoke the autorization key within the credentials object associated to the specified device identifier</documentation>
+      <wsdl:input message="tns:RevokeAuthorizationKeyRequest" />
+      <wsdl:output message="tns:RevokeAuthorizationKeyResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="validateCredentials" parameterOrder="credentials">
+      <documentation> Verify if the credentials are valid and can be used by the webservice</documentation>
+      <wsdl:input message="tns:ValidateCredentialsRequest" />
+      <wsdl:output message="tns:ValidateCredentialsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="unixTimestampToUedDate" parameterOrder="credentials timeStamp">
+      <documentation> Convert an unix timestamp to UedDate </documentation>
+      <wsdl:input message="tns:UnixTimestampToUedDateRequest" />
+      <wsdl:output message="tns:UnixTimestampToUedDateResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="_uedDateToUnixTimestamp" parameterOrder="credentials uedDate">
+      <documentation> Convert an UedDate to an unix timestamp </documentation>
+      <wsdl:input message="tns:_uedDateToUnixTimestampRequest" />
+      <wsdl:output message="tns:_uedDateToUnixTimestampResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="uedDateToUnixTimestamp" parameterOrder="credentials uedDate">
+      <documentation> Convert an UedDate to an unix timestamp </documentation>
+      <wsdl:input message="tns:UedDateToUnixTimestampRequest" />
+      <wsdl:output message="tns:UedDateToUnixTimestampResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getMyCourses" parameterOrder="credentials">
+      <documentation> Get the courses of the user</documentation>
+      <wsdl:input message="tns:GetMyCoursesRequest" />
+      <wsdl:output message="tns:GetMyCoursesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="canAccessToCourse" parameterOrder="credentials courseId">
+      <documentation> Verify if the user can access to the information of a specific course</documentation>
+      <wsdl:input message="tns:CanAccessToCourseRequest" />
+      <wsdl:output message="tns:CanAccessToCourseResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getCourseRecentEnrolments" parameterOrder="credentials courseId UedStartDate">
+      <documentation> Return the recent enrolments in a course</documentation>
+      <wsdl:input message="tns:GetCourseRecentEnrolmentsRequest" />
+      <wsdl:output message="tns:GetCourseRecentEnrolmentsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getCourseRecentModifications" parameterOrder="credentials courseId UedStartDate">
+      <documentation> Return the recent modifications in a course</documentation>
+      <wsdl:input message="tns:GetCourseRecentModificationsRequest" />
+      <wsdl:output message="tns:GetCourseRecentModificationsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getCourseRecentForumActivity" parameterOrder="credentials courseId UedStartDate">
+      <documentation> Return the recent forum activity within a course</documentation>
+      <wsdl:input message="tns:GetCourseRecentForumActivityRequest" />
+      <wsdl:output message="tns:GetCourseRecentForumActivityResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getUserPublicProfile" parameterOrder="credentials userId courseId">
+      <documentation> Get the public profile of a specific user</documentation>
+      <wsdl:input message="tns:GetUserPublicProfileRequest" />
+      <wsdl:output message="tns:GetUserPublicProfileResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getMyUserPublicProfile" parameterOrder="credentials">
+      <documentation> Get the user profile</documentation>
+      <wsdl:input message="tns:GetMyUserPublicProfileRequest" />
+      <wsdl:output message="tns:GetMyUserPublicProfileResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getVersion">
+      <documentation> Get the webservice plugin version</documentation>
+      <wsdl:input message="tns:GetVersionRequest" />
+      <wsdl:output message="tns:GetVersionResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UEDWSBinding" type="tns:UEDWSPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="isWebserviceEnabled">
+      <soap:operation soapAction="urn:UEDWS#UEDWSServer#isWebserviceEnabled" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="return" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAuthorizationKey">
+      <soap:operation soapAction="urn:UEDWS#UEDWSServer#getAuthorizationKey" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="username password deviceIdentification" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="return" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="revokeAuthorizationKey">
+      <soap:operation soapAction="urn:UEDWS#UEDWSServer#revokeAuthorizationKey" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="credentials deviceIdentification" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="return" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="validateCredentials">
+      <soap:operation soapAction="urn:UEDWS#UEDWSServer#validateCredentials" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="credentials" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="return" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="unixTimestampToUedDate">
+      <soap:operation soapAction="urn:UEDWS#UEDWSServer#unixTimestampToUedDate" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="credentials timeStamp" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="return" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="_uedDateToUnixTimestamp">
+      <soap:operation soapAction="urn:UEDWS#UEDWSServer#_uedDateToUnixTimestamp" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="credentials uedDate" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="return" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="uedDateToUnixTimestamp">
+      <soap:operation soapAction="urn:UEDWS#UEDWSServer#uedDateToUnixTimestamp" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="credentials uedDate" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="return" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMyCourses">
+      <soap:operation soapAction="urn:UEDWS#UEDWSServer#getMyCourses" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="credentials" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="return" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="canAccessToCourse">
+      <soap:operation soapAction="urn:UEDWS#UEDWSServer#canAccessToCourse" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="credentials courseId" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="return" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCourseRecentEnrolments">
+      <soap:operation soapAction="urn:UEDWS#UEDWSServer#getCourseRecentEnrolments" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="credentials courseId UedStartDate" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="return" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCourseRecentModifications">
+      <soap:operation soapAction="urn:UEDWS#UEDWSServer#getCourseRecentModifications" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="credentials courseId UedStartDate" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="return" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCourseRecentForumActivity">
+      <soap:operation soapAction="urn:UEDWS#UEDWSServer#getCourseRecentForumActivity" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="credentials courseId UedStartDate" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="return" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserPublicProfile">
+      <soap:operation soapAction="urn:UEDWS#UEDWSServer#getUserPublicProfile" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="credentials userId courseId" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="return" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMyUserPublicProfile">
+      <soap:operation soapAction="urn:UEDWS#UEDWSServer#getMyUserPublicProfile" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="credentials" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="return" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getVersion">
+      <soap:operation soapAction="urn:UEDWS#UEDWSServer#getVersion" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://ead.ipleiria.pt/admin/report/uedws/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="return" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UEDWSService">
+    <documentation>Main web service class file for the module</documentation>
+    <wsdl:port name="UEDWSPort" binding="tns:UEDWSBinding">
+      <soap:address location="http://ead.ipleiria.pt/admin/report/uedws/index.php" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

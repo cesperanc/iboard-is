@@ -1,0 +1,1545 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" xmlns:ee="http://schemas.microsoft.com/expression/2010/effects"
+	mc:Ignorable="d"
+	x:Class="iBoard.TwitterControl"
+	x:Name="UserControl"
+	d:DesignWidth="640" d:DesignHeight="480" Initialized="UserControl_Initialized" Loaded="UserControl_Loaded">
+    
+    <Grid x:Name="LayoutRoot">
+        <VisualStateManager.CustomVisualStateManager>
+            <ei:ExtendedVisualStateManager/>
+        </VisualStateManager.CustomVisualStateManager>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="TwitterStates">
+                <VisualStateGroup.Transitions>
+                    <VisualTransition GeneratedDuration="0:0:1">
+                        <ei:ExtendedVisualStateManager.TransitionEffect>
+                            <ee:SlideInTransitionEffect SlideDirection="RightToLeft"/>
+                        </ei:ExtendedVisualStateManager.TransitionEffect>
+                        <VisualTransition.GeneratedEasingFunction>
+                            <CubicEase EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxUserTime">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:1" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterUserTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:1" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="txtTwittPost">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="btnPostTwitt">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="txtTwittPost">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="btnPostTwitt">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxMentionsTimeline">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxMessagesTimeline">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualTransition>
+                    <VisualTransition From="TwitterMain" GeneratedDuration="0:0:1" To="TwitterUserTimeline">
+                        <ei:ExtendedVisualStateManager.TransitionEffect>
+                            <ee:SlideInTransitionEffect SlideDirection="RightToLeft"/>
+                        </ei:ExtendedVisualStateManager.TransitionEffect>
+                        <VisualTransition.GeneratedEasingFunction>
+                            <CubicEase EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterUserTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterTimelinesGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterTimelinesGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterUserTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualTransition>
+                    <VisualTransition From="TwitterUserTimeline" GeneratedDuration="0:0:1" To="TwitterMain">
+                        <VisualTransition.GeneratedEasingFunction>
+                            <CircleEase EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                        <ei:ExtendedVisualStateManager.TransitionEffect>
+                            <ee:SlideInTransitionEffect SlideDirection="LeftToRight"/>
+                        </ei:ExtendedVisualStateManager.TransitionEffect>
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterUserTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterUserTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblHome">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterTimelinesGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterTimelinesGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblHome">
+                                <EasingColorKeyFrame KeyTime="0" Value="#3FFFFFFF"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMentionsTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMessagesTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterTwittTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualTransition>
+                    <VisualTransition From="TwitterMain" GeneratedDuration="0:0:1" To="TwitterMainMessages">
+                        <ei:ExtendedVisualStateManager.TransitionEffect>
+                            <ee:SlideInTransitionEffect SlideDirection="TopToBottom"/>
+                        </ei:ExtendedVisualStateManager.TransitionEffect>
+                        <VisualTransition.GeneratedEasingFunction>
+                            <CubicEase EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                        <Storyboard>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblMessages">
+                                <EasingColorKeyFrame KeyTime="0" Value="#3FFFFFFF"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblHome">
+                                <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblMessages">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblHome">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMessagesTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterMessagesTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterTwittTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualTransition>
+                    <VisualTransition From="TwitterMainMentions" GeneratedDuration="0:0:1" To="TwitterMainMessages">
+                        <ei:ExtendedVisualStateManager.TransitionEffect>
+                            <ee:SlideInTransitionEffect SlideDirection="TopToBottom"/>
+                        </ei:ExtendedVisualStateManager.TransitionEffect>
+                        <VisualTransition.GeneratedEasingFunction>
+                            <CubicEase EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxMessagesTimeline">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxMentionsTimeline">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblMentions">
+                                <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblMentions">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblMessages">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblMessages">
+                                <EasingColorKeyFrame KeyTime="0" Value="#3FFFFFFF"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterMentionsTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMentionsTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMessagesTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterMessagesTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualTransition>
+                    <VisualTransition From="TwitterMainMessages" GeneratedDuration="0:0:1" To="TwitterMain">
+                        <ei:ExtendedVisualStateManager.TransitionEffect>
+                            <ee:SlideInTransitionEffect SlideDirection="BottomToTop"/>
+                        </ei:ExtendedVisualStateManager.TransitionEffect>
+                        <VisualTransition.GeneratedEasingFunction>
+                            <CubicEase EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                        <Storyboard>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblHome">
+                                <EasingColorKeyFrame KeyTime="0" Value="#3FFFFFFF"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblHome">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblMessages">
+                                <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblMessages">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMentionsTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMessagesTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterTwittTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterMentionsTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterMessagesTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterTwittTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxHomeTimeline">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="listboxHomeTimeline">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualTransition>
+                    <VisualTransition From="TwitterMainMessages" GeneratedDuration="0:0:1" To="TwitterMainMentions">
+                        <ei:ExtendedVisualStateManager.TransitionEffect>
+                            <ee:SlideInTransitionEffect SlideDirection="BottomToTop"/>
+                        </ei:ExtendedVisualStateManager.TransitionEffect>
+                        <VisualTransition.GeneratedEasingFunction>
+                            <CubicEase EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                        <Storyboard>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblMentions">
+                                <EasingColorKeyFrame KeyTime="0" Value="#3FFFFFFF"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblMentions">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblMessages">
+                                <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblMessages">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxMentionsTimeline">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="listboxMentionsTimeline">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="listboxMessagesTimeline">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxMessagesTimeline">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMessagesTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterTwittTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterMessagesTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterTwittTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterMentionsTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMentionsTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualTransition>
+                    <VisualTransition From="TwitterMainPost" GeneratedDuration="0:0:1" To="TwitterMain">
+                        <ei:ExtendedVisualStateManager.TransitionEffect>
+                            <ee:SlideInTransitionEffect SlideDirection="BottomToTop"/>
+                        </ei:ExtendedVisualStateManager.TransitionEffect>
+                        <VisualTransition.GeneratedEasingFunction>
+                            <CubicEase EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxHomeTimeline">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterTwittTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterTwittTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblHome">
+                                <EasingColorKeyFrame KeyTime="0" Value="#3FFFFFFF"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblHome">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblTwitt">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblTwitt">
+                                <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                            </ColorAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualTransition>
+                    <VisualTransition From="TwitterMainPost" GeneratedDuration="0:0:1" To="TwitterMainMentions">
+                        <ei:ExtendedVisualStateManager.TransitionEffect>
+                            <ee:SlideInTransitionEffect SlideDirection="BottomToTop"/>
+                        </ei:ExtendedVisualStateManager.TransitionEffect>
+                        <VisualTransition.GeneratedEasingFunction>
+                            <CubicEase EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                        <Storyboard>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblMentions">
+                                <EasingColorKeyFrame KeyTime="0" Value="#3FFFFFFF"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblMentions">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblTwitt">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblTwitt">
+                                <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMessagesTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterTwittTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterMessagesTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterTwittTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMentionsTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterMentionsTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxMentionsTimeline">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="listboxMentionsTimeline">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualTransition>
+                    <VisualTransition From="TwitterMainPost" GeneratedDuration="0:0:1" To="TwitterMainMessages">
+                        <ei:ExtendedVisualStateManager.TransitionEffect>
+                            <ee:SlideInTransitionEffect SlideDirection="BottomToTop"/>
+                        </ei:ExtendedVisualStateManager.TransitionEffect>
+                        <VisualTransition.GeneratedEasingFunction>
+                            <CubicEase EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterMentionsTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterTwittTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMentionsTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterTwittTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMessagesTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterMessagesTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxMessagesTimeline">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="listboxMessagesTimeline">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblMessages">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblMessages">
+                                <EasingColorKeyFrame KeyTime="0" Value="#3FFFFFFF"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblTwitt">
+                                <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblTwitt">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualTransition>
+                    <VisualTransition From="TwitterMain" GeneratedDuration="0:0:1" To="TwitterMainPost">
+                        <ei:ExtendedVisualStateManager.TransitionEffect>
+                            <ee:SlideInTransitionEffect SlideDirection="TopToBottom"/>
+                        </ei:ExtendedVisualStateManager.TransitionEffect>
+                        <VisualTransition.GeneratedEasingFunction>
+                            <CubicEase EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                        <Storyboard>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblHome">
+                                <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblHome">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblTwitt">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblTwitt">
+                                <EasingColorKeyFrame KeyTime="0" Value="#3FFFFFFF"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterMentionsTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMentionsTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMessagesTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterTwittTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="txtTwittPost">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="btnPostTwitt">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualTransition>
+                    <VisualTransition From="TwitterMainMentions" GeneratedDuration="0:0:1" To="TwitterMainPost">
+                        <ei:ExtendedVisualStateManager.TransitionEffect>
+                            <ee:SlideInTransitionEffect SlideDirection="TopToBottom"/>
+                        </ei:ExtendedVisualStateManager.TransitionEffect>
+                        <VisualTransition.GeneratedEasingFunction>
+                            <CubicEase EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                        <Storyboard>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblTwitt">
+                                <EasingColorKeyFrame KeyTime="0" Value="#3FFFFFFF"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblTwitt">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblMentions">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblMentions">
+                                <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterMentionsTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMentionsTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterTwittTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterTwittTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="txtTwittPost">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="btnPostTwitt">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="txtTwittPost">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="btnPostTwitt">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="txtUserLastPosts">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualTransition>
+                    <VisualTransition From="TwitterMainMessages" GeneratedDuration="0:0:1" To="TwitterMainPost">
+                        <ei:ExtendedVisualStateManager.TransitionEffect>
+                            <ee:SlideInTransitionEffect SlideDirection="TopToBottom"/>
+                        </ei:ExtendedVisualStateManager.TransitionEffect>
+                        <VisualTransition.GeneratedEasingFunction>
+                            <CubicEase EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                        <Storyboard>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblMessages">
+                                <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblMessages">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblTwitt">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblTwitt">
+                                <EasingColorKeyFrame KeyTime="0" Value="#3FFFFFFF"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMentionsTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMessagesTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterMentionsTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterMessagesTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterTwittTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterTwittTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="txtTwittPost">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="btnPostTwitt">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="txtTwittPost">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="btnPostTwitt">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="txtUserLastPosts">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualTransition>
+                    <VisualTransition From="TwitterMainMentions" GeneratedDuration="0:0:1" To="TwitterUserTimeline">
+                        <ei:ExtendedVisualStateManager.TransitionEffect>
+                            <ee:SlideInTransitionEffect SlideDirection="RightToLeft"/>
+                        </ei:ExtendedVisualStateManager.TransitionEffect>
+                        <VisualTransition.GeneratedEasingFunction>
+                            <CubicEase EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterUserTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterUserTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxUserTime">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="listboxUserTime">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterTimelinesGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterTimelinesGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualTransition>
+                    <VisualTransition From="TwitterUserTimeline" GeneratedDuration="0:0:1" To="TwitterMainMessages">
+                        <ei:ExtendedVisualStateManager.TransitionEffect>
+                            <ee:SlideInTransitionEffect/>
+                        </ei:ExtendedVisualStateManager.TransitionEffect>
+                        <VisualTransition.GeneratedEasingFunction>
+                            <CubicEase EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterUserTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterUserTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxHomeTimeline">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxMentionsTimeline">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="txtTwittPost">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="listboxHomeTimeline">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="listboxMentionsTimeline">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="txtTwittPost">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblMessages">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblMessages">
+                                <EasingColorKeyFrame KeyTime="0" Value="#3FFFFFFF"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterTimelinesGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterTimelinesGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMentionsTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterMessagesTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterTwittTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualTransition>
+                    <VisualTransition From="TwitterUserTimeline" GeneratedDuration="0:0:1" To="TwitterMainPost">
+                        <ei:ExtendedVisualStateManager.TransitionEffect>
+                            <ee:SlideInTransitionEffect/>
+                        </ei:ExtendedVisualStateManager.TransitionEffect>
+                        <VisualTransition.GeneratedEasingFunction>
+                            <CubicEase EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterUserTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterUserTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxHomeTimeline">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxMentionsTimeline">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxMessagesTimeline">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="listboxHomeTimeline">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="listboxMentionsTimeline">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="listboxMessagesTimeline">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="txtTwittPost">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="btnPostTwitt">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="txtTwittPost">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="btnPostTwitt">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterTwittTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterTimelinesGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterTimelinesGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblTwitt">
+                                <EasingColorKeyFrame KeyTime="0" Value="#3FFFFFFF"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblTwitt">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMentionsTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMessagesTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterTwittTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="txtUserLastPosts">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualTransition>
+                    <VisualTransition From="TwitterMainMessages" GeneratedDuration="0:0:1" To="TwitterUserTimeline">
+                        <ei:ExtendedVisualStateManager.TransitionEffect>
+                            <ee:SlideInTransitionEffect SlideDirection="RightToLeft"/>
+                        </ei:ExtendedVisualStateManager.TransitionEffect>
+                        <VisualTransition.GeneratedEasingFunction>
+                            <CubicEase EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterUserTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterUserTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterTimelinesGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterTimelinesGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxUserTime">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="btnUserTimelineBack">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="imgUser">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="txtUserInfo">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="listboxUserTime">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="btnUserTimelineBack">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="imgUser">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="txtUserInfo">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualTransition>
+                    <VisualTransition From="TwitterMainPost" GeneratedDuration="0:0:1" To="TwitterUserTimeline">
+                        <ei:ExtendedVisualStateManager.TransitionEffect>
+                            <ee:SlideInTransitionEffect SlideDirection="RightToLeft"/>
+                        </ei:ExtendedVisualStateManager.TransitionEffect>
+                        <VisualTransition.GeneratedEasingFunction>
+                            <CubicEase EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterUserTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterUserTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxUserTime">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="listboxUserTime">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterTimelinesGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterTimelinesGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualTransition>
+                    <VisualTransition From="TwitterUserTimeline" GeneratedDuration="0:0:1" To="TwitterMainMentions">
+                        <ei:ExtendedVisualStateManager.TransitionEffect>
+                            <ee:SlideInTransitionEffect SlideDirection="LeftToRight"/>
+                        </ei:ExtendedVisualStateManager.TransitionEffect>
+                        <VisualTransition.GeneratedEasingFunction>
+                            <CubicEase EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterUserTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterUserTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxHomeTimeline">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxMessagesTimeline">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="txtTwittPost">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="btnPostTwitt">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="listboxHomeTimeline">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="listboxMessagesTimeline">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="txtTwittPost">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="btnPostTwitt">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblMentions">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblMentions">
+                                <EasingColorKeyFrame KeyTime="0" Value="#3FFFFFFF"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterTimelinesGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterTimelinesGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterMentionsTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMessagesTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterTwittTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualTransition>
+                    <VisualTransition From="TwitterMain" GeneratedDuration="0:0:1" To="TwitterMainMentions">
+                        <ei:ExtendedVisualStateManager.TransitionEffect>
+                            <ee:SlideInTransitionEffect SlideDirection="TopToBottom"/>
+                        </ei:ExtendedVisualStateManager.TransitionEffect>
+                        <VisualTransition.GeneratedEasingFunction>
+                            <CubicEase EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                        <Storyboard>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblMentions">
+                                <EasingColorKeyFrame KeyTime="0" Value="#3FFFFFFF"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblMentions">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblHome">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblHome">
+                                <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterTwittTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMessagesTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterMentionsTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                            </BooleanAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualTransition>
+                    <VisualTransition From="TwitterMainMentions" GeneratedDuration="0:0:1" To="TwitterMain">
+                        <ei:ExtendedVisualStateManager.TransitionEffect>
+                            <ee:SlideInTransitionEffect SlideDirection="BottomToTop"/>
+                        </ei:ExtendedVisualStateManager.TransitionEffect>
+                        <VisualTransition.GeneratedEasingFunction>
+                            <CubicEase EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                    </VisualTransition>
+                </VisualStateGroup.Transitions>
+                <VisualState x:Name="TwitterMain">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxUserTime">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="listboxUserTime">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterUserTimelineGrid">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterUserTimelineGrid">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblHome">
+                            <EasingColorKeyFrame KeyTime="0" Value="#3FFFFFFF"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblHome">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterTimelinesGrid">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterTimelinesGrid">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                        </BooleanAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="TwitterUserTimeline">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterUserTimelineGrid">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterTimelinesGrid">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listviewFollowers">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterTimelinesGrid">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="TwitterMainMentions">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxUserTime">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="listboxUserTime">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterUserTimelineGrid">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterUserTimelineGrid">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblMentions">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblMentions">
+                            <EasingColorKeyFrame KeyTime="0" Value="#3FFFFFFF"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxHomeTimeline">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="listboxHomeTimeline">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxMessagesTimeline">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="txtTwittPost">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="btnPostTwitt">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="txtTwittPost">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="btnPostTwitt">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterMenuBar">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterTimelinesGrid">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterMentionsTimelineGrid">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMessagesTimelineGrid">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterMessagesTimelineGrid">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterTwittTimelineGrid">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="TwitterMainMessages">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxUserTime">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="listboxUserTime">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterUserTimelineGrid">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterUserTimelineGrid">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblMessages">
+                            <EasingColorKeyFrame KeyTime="0" Value="#3FFFFFFF"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblMessages">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxMentionsTimeline">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="listboxMentionsTimeline">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxHomeTimeline">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="listboxHomeTimeline">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="txtTwittPost">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="btnPostTwitt">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="txtTwittPost">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="btnPostTwitt">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterTimelinesGrid">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMentionsTimelineGrid">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterTwittTimelineGrid">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterMessagesTimelineGrid">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="TwitterMainPost">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxUserTime">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="listboxUserTime">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterUserTimelineGrid">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterUserTimelineGrid">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblHome">
+                            <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblHome">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxMentionsTimeline">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="listboxMentionsTimeline">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="listboxMessagesTimeline">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxMessagesTimeline">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="lblTwitt">
+                            <EasingColorKeyFrame KeyTime="0" Value="#3FFFFFFF"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="lblTwitt">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="listboxHomeTimeline">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="txtTwittPost">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="btnPostTwitt">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterTwittTimelineGrid">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="txtTwittPost">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="btnPostTwitt">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterTimelinesGrid">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterMentionsTimelineGrid">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="TwitterMessagesTimelineGrid">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterHomeTimelineGrid">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMentionsTimelineGrid">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="TwitterMessagesTimelineGrid">
+                            <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                        </BooleanAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="txtUserLastPosts">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid x:Name="TwitterUserTimelineGrid" Visibility="Hidden">
+            <VisualStateManager.CustomVisualStateManager>
+                <ei:ExtendedVisualStateManager/>
+            </VisualStateManager.CustomVisualStateManager>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="TwitterStates2">
+                    <VisualStateGroup.Transitions>
+                        <VisualTransition GeneratedDuration="0:0:1">
+                            <ei:ExtendedVisualStateManager.TransitionEffect>
+                                <ee:SlideInTransitionEffect/>
+                            </ei:ExtendedVisualStateManager.TransitionEffect>
+                            <VisualTransition.GeneratedEasingFunction>
+                                <CubicEase EasingMode="EaseOut"/>
+                            </VisualTransition.GeneratedEasingFunction>
+                        </VisualTransition>
+                        <VisualTransition From="TwitterMain" GeneratedDuration="0:0:2" To="TwitterUserTimeline">
+                            <ei:ExtendedVisualStateManager.TransitionEffect>
+                                <ee:SlideInTransitionEffect SlideDirection="RightToLeft"/>
+                            </ei:ExtendedVisualStateManager.TransitionEffect>
+                            <VisualTransition.GeneratedEasingFunction>
+                                <CubicEase EasingMode="EaseOut"/>
+                            </VisualTransition.GeneratedEasingFunction>
+                        </VisualTransition>
+                        <VisualTransition From="TwitterUserTimeline" GeneratedDuration="0:0:2" To="TwitterMain">
+                            <VisualTransition.GeneratedEasingFunction>
+                                <CircleEase EasingMode="EaseOut"/>
+                            </VisualTransition.GeneratedEasingFunction>
+                            <ei:ExtendedVisualStateManager.TransitionEffect>
+                                <ee:SlideInTransitionEffect SlideDirection="LeftToRight"/>
+                            </ei:ExtendedVisualStateManager.TransitionEffect>
+                        </VisualTransition>
+                    </VisualStateGroup.Transitions>
+                    <VisualState x:Name="TwitterMain2"/>
+                    <VisualState x:Name="TwitterUserTimeline2"/>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <ListBox x:Name="listboxUserTime" Margin="8,107,8,8" Background="#00000000" Foreground="#FFEDEDED" BorderBrush="#197F9DB9" RenderTransformOrigin="0.5,0.5"/>
+            <Button x:Name="btnUserTimelineBack" Content="Back" Width="75" RenderTransformOrigin="2.747,0.799" HorizontalAlignment="Right" Margin="0,8,8,0" VerticalAlignment="Top" Click="btnUserTimelineBack_Click"/>
+            <Image x:Name="imgUser" HorizontalAlignment="Left" Height="75" Margin="8,8,0,0" VerticalAlignment="Top" Width="75"/>
+            <TextBlock x:Name="txtUserInfo" Margin="87,8,90,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="95" Foreground="White"/>
+        </Grid>
+        <Grid x:Name="TwitterTimelinesGrid">
+            <VisualStateManager.CustomVisualStateManager>
+                <ei:ExtendedVisualStateManager/>
+            </VisualStateManager.CustomVisualStateManager>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="TwitterStates3">
+                    <VisualStateGroup.Transitions>
+                        <VisualTransition GeneratedDuration="0:0:1">
+                            <ei:ExtendedVisualStateManager.TransitionEffect>
+                                <ee:SlideInTransitionEffect/>
+                            </ei:ExtendedVisualStateManager.TransitionEffect>
+                            <VisualTransition.GeneratedEasingFunction>
+                                <CubicEase EasingMode="EaseOut"/>
+                            </VisualTransition.GeneratedEasingFunction>
+                        </VisualTransition>
+                        <VisualTransition From="TwitterMain" GeneratedDuration="0:0:2" To="TwitterUserTimeline">
+                            <ei:ExtendedVisualStateManager.TransitionEffect>
+                                <ee:SlideInTransitionEffect SlideDirection="RightToLeft"/>
+                            </ei:ExtendedVisualStateManager.TransitionEffect>
+                            <VisualTransition.GeneratedEasingFunction>
+                                <CubicEase EasingMode="EaseOut"/>
+                            </VisualTransition.GeneratedEasingFunction>
+                        </VisualTransition>
+                        <VisualTransition From="TwitterUserTimeline" GeneratedDuration="0:0:2" To="TwitterMain">
+                            <VisualTransition.GeneratedEasingFunction>
+                                <CircleEase EasingMode="EaseOut"/>
+                            </VisualTransition.GeneratedEasingFunction>
+                            <ei:ExtendedVisualStateManager.TransitionEffect>
+                                <ee:SlideInTransitionEffect SlideDirection="LeftToRight"/>
+                            </ei:ExtendedVisualStateManager.TransitionEffect>
+                        </VisualTransition>
+                    </VisualStateGroup.Transitions>
+                    <VisualState x:Name="TwitterMain3"/>
+                    <VisualState x:Name="TwitterUserTimeline3"/>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <WrapPanel x:Name="TwitterMenuBar" Height="24" Margin="8,8,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="229.5">
+                <Label x:Name="lblHome" Content="HOME" Foreground="White" MouseEnter="getHandCursor" MouseLeave="getDefaultCursor" MouseDown="lblHome_MouseDown" ToolTip="Get user Home timeline"/>
+                <Label x:Name="lblMentions" Content="MENTIONS" Foreground="White" MouseLeave="getDefaultCursor" MouseEnter="getHandCursor" MouseDown="lblMentions_MouseDown" ToolTip="Get user Mentions timeline"/>
+                <Label x:Name="lblMessages" Content="MESSAGES" Foreground="White" MouseLeave="getDefaultCursor" MouseEnter="getHandCursor" MouseDown="lblMessages_MouseDown" ToolTip="Get user Direct Messages timeline"/>
+                <Label x:Name="lblTwitt" Content="TWITT" Foreground="White" MouseLeave="getDefaultCursor" MouseEnter="getHandCursor" MouseDown="lblTwitt_MouseDown" ToolTip="Post a new Twitt"/>
+            </WrapPanel>
+            <Grid x:Name="TwitterHomeTimelineGrid">
+                
+                <VisualStateManager.CustomVisualStateManager>
+                    <ei:ExtendedVisualStateManager/>
+                </VisualStateManager.CustomVisualStateManager>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="TwitterStates1">
+                        <VisualStateGroup.Transitions>
+                            <VisualTransition GeneratedDuration="0:0:1">
+                                <ei:ExtendedVisualStateManager.TransitionEffect>
+                                    <ee:SlideInTransitionEffect/>
+                                </ei:ExtendedVisualStateManager.TransitionEffect>
+                                <VisualTransition.GeneratedEasingFunction>
+                                    <CubicEase EasingMode="EaseOut"/>
+                                </VisualTransition.GeneratedEasingFunction>
+                            </VisualTransition>
+                            <VisualTransition From="TwitterMain" GeneratedDuration="0:0:2" To="TwitterUserTimeline">
+                                <ei:ExtendedVisualStateManager.TransitionEffect>
+                                    <ee:SlideInTransitionEffect SlideDirection="RightToLeft"/>
+                                </ei:ExtendedVisualStateManager.TransitionEffect>
+                                <VisualTransition.GeneratedEasingFunction>
+                                    <CubicEase EasingMode="EaseOut"/>
+                                </VisualTransition.GeneratedEasingFunction>
+                            </VisualTransition>
+                            <VisualTransition From="TwitterUserTimeline" GeneratedDuration="0:0:2" To="TwitterMain">
+                                <VisualTransition.GeneratedEasingFunction>
+                                    <CircleEase EasingMode="EaseOut"/>
+                                </VisualTransition.GeneratedEasingFunction>
+                                <ei:ExtendedVisualStateManager.TransitionEffect>
+                                    <ee:SlideInTransitionEffect SlideDirection="LeftToRight"/>
+                                </ei:ExtendedVisualStateManager.TransitionEffect>
+                            </VisualTransition>
+                        </VisualStateGroup.Transitions>
+                        <VisualState x:Name="TwitterMain1"/>
+                        <VisualState x:Name="TwitterUserTimeline1"/>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <ListBox x:Name="listboxHomeTimeline" Margin="8,32,8,8" SelectionChanged="listboxTimeline_SelectionChanged" BorderBrush="#197F9DB9" Background="Transparent" Foreground="White" RenderTransformOrigin="0.5,0.5" d:LayoutOverrides="VerticalAlignment">
+                </ListBox>
+            </Grid>
+            <Grid x:Name="TwitterMentionsTimelineGrid" Visibility="Hidden" d:IsLocked="True">
+                <VisualStateManager.CustomVisualStateManager>
+                    <ei:ExtendedVisualStateManager/>
+                </VisualStateManager.CustomVisualStateManager>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="TwitterStates4">
+                        <VisualStateGroup.Transitions>
+                            <VisualTransition GeneratedDuration="0:0:1">
+                                <ei:ExtendedVisualStateManager.TransitionEffect>
+                                    <ee:SlideInTransitionEffect/>
+                                </ei:ExtendedVisualStateManager.TransitionEffect>
+                                <VisualTransition.GeneratedEasingFunction>
+                                    <CubicEase EasingMode="EaseOut"/>
+                                </VisualTransition.GeneratedEasingFunction>
+                            </VisualTransition>
+                            <VisualTransition From="TwitterMain" GeneratedDuration="0:0:2" To="TwitterUserTimeline">
+                                <ei:ExtendedVisualStateManager.TransitionEffect>
+                                    <ee:SlideInTransitionEffect SlideDirection="RightToLeft"/>
+                                </ei:ExtendedVisualStateManager.TransitionEffect>
+                                <VisualTransition.GeneratedEasingFunction>
+                                    <CubicEase EasingMode="EaseOut"/>
+                                </VisualTransition.GeneratedEasingFunction>
+                            </VisualTransition>
+                            <VisualTransition From="TwitterUserTimeline" GeneratedDuration="0:0:2" To="TwitterMain">
+                                <VisualTransition.GeneratedEasingFunction>
+                                    <CircleEase EasingMode="EaseOut"/>
+                                </VisualTransition.GeneratedEasingFunction>
+                                <ei:ExtendedVisualStateManager.TransitionEffect>
+                                    <ee:SlideInTransitionEffect SlideDirection="LeftToRight"/>
+                                </ei:ExtendedVisualStateManager.TransitionEffect>
+                            </VisualTransition>
+                        </VisualStateGroup.Transitions>
+                        <VisualState x:Name="TwitterMain4"/>
+                        <VisualState x:Name="TwitterUserTimeline4"/>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <ListBox x:Name="listboxMentionsTimeline" Margin="8,32,8,8" SelectionChanged="listboxTimeline_SelectionChanged" BorderBrush="#197F9DB9" Background="Transparent" Foreground="White" RenderTransformOrigin="0.5,0.5" d:LayoutOverrides="VerticalAlignment">
+                    <ListBox.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </ListBox.RenderTransform>
+                </ListBox>
+            </Grid>
+            <Grid x:Name="TwitterMessagesTimelineGrid" Visibility="Hidden" d:IsLocked="True">
+                <VisualStateManager.CustomVisualStateManager>
+                    <ei:ExtendedVisualStateManager/>
+                </VisualStateManager.CustomVisualStateManager>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="TwitterStates5">
+                        <VisualStateGroup.Transitions>
+                            <VisualTransition GeneratedDuration="0:0:1">
+                                <ei:ExtendedVisualStateManager.TransitionEffect>
+                                    <ee:SlideInTransitionEffect/>
+                                </ei:ExtendedVisualStateManager.TransitionEffect>
+                                <VisualTransition.GeneratedEasingFunction>
+                                    <CubicEase EasingMode="EaseOut"/>
+                                </VisualTransition.GeneratedEasingFunction>
+                            </VisualTransition>
+                            <VisualTransition From="TwitterMain" GeneratedDuration="0:0:2" To="TwitterUserTimeline">
+                                <ei:ExtendedVisualStateManager.TransitionEffect>
+                                    <ee:SlideInTransitionEffect SlideDirection="RightToLeft"/>
+                                </ei:ExtendedVisualStateManager.TransitionEffect>
+                                <VisualTransition.GeneratedEasingFunction>
+                                    <CubicEase EasingMode="EaseOut"/>
+                                </VisualTransition.GeneratedEasingFunction>
+                            </VisualTransition>
+                            <VisualTransition From="TwitterUserTimeline" GeneratedDuration="0:0:2" To="TwitterMain">
+                                <VisualTransition.GeneratedEasingFunction>
+                                    <CircleEase EasingMode="EaseOut"/>
+                                </VisualTransition.GeneratedEasingFunction>
+                                <ei:ExtendedVisualStateManager.TransitionEffect>
+                                    <ee:SlideInTransitionEffect SlideDirection="LeftToRight"/>
+                                </ei:ExtendedVisualStateManager.TransitionEffect>
+                            </VisualTransition>
+                        </VisualStateGroup.Transitions>
+                        <VisualState x:Name="TwitterMain5"/>
+                        <VisualState x:Name="TwitterUserTimeline5"/>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <ListBox x:Name="listboxMessagesTimeline" Margin="8,32,8,8" SelectionChanged="listboxTimeline_SelectionChanged" BorderBrush="#197F9DB9" Background="Transparent" Foreground="White" RenderTransformOrigin="0.5,0.5" d:LayoutOverrides="VerticalAlignment">
+                    <ListBox.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </ListBox.RenderTransform>
+                </ListBox>
+            </Grid>
+            <Grid x:Name="TwitterTwittTimelineGrid" Visibility="Hidden">
+                <VisualStateManager.CustomVisualStateManager>
+                    <ei:ExtendedVisualStateManager/>
+                </VisualStateManager.CustomVisualStateManager>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="TwitterStates6">
+                        <VisualStateGroup.Transitions>
+                            <VisualTransition GeneratedDuration="0:0:1">
+                                <ei:ExtendedVisualStateManager.TransitionEffect>
+                                    <ee:SlideInTransitionEffect/>
+                                </ei:ExtendedVisualStateManager.TransitionEffect>
+                                <VisualTransition.GeneratedEasingFunction>
+                                    <CubicEase EasingMode="EaseOut"/>
+                                </VisualTransition.GeneratedEasingFunction>
+                            </VisualTransition>
+                            <VisualTransition From="TwitterMain" GeneratedDuration="0:0:2" To="TwitterUserTimeline">
+                                <ei:ExtendedVisualStateManager.TransitionEffect>
+                                    <ee:SlideInTransitionEffect SlideDirection="RightToLeft"/>
+                                </ei:ExtendedVisualStateManager.TransitionEffect>
+                                <VisualTransition.GeneratedEasingFunction>
+                                    <CubicEase EasingMode="EaseOut"/>
+                                </VisualTransition.GeneratedEasingFunction>
+                            </VisualTransition>
+                            <VisualTransition From="TwitterUserTimeline" GeneratedDuration="0:0:2" To="TwitterMain">
+                                <VisualTransition.GeneratedEasingFunction>
+                                    <CircleEase EasingMode="EaseOut"/>
+                                </VisualTransition.GeneratedEasingFunction>
+                                <ei:ExtendedVisualStateManager.TransitionEffect>
+                                    <ee:SlideInTransitionEffect SlideDirection="LeftToRight"/>
+                                </ei:ExtendedVisualStateManager.TransitionEffect>
+                            </VisualTransition>
+                        </VisualStateGroup.Transitions>
+                        <VisualState x:Name="TwitterMain6"/>
+                        <VisualState x:Name="TwitterUserTimeline6"/>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <TextBox x:Name="txtTwittPost" Height="67" MaxLength="140" TextWrapping="Wrap" Margin="8,41,96,0" VerticalAlignment="Top" TextChanged="txtTwittPost_TextChanged"/>
+                <Button x:Name="btnPostTwitt" Content="SEND" HorizontalAlignment="Right" Margin="0,41,8,0" VerticalAlignment="Top" Width="84" Height="67" Click="btnPostTwitt_Click" />
+                <TextBox x:Name="txtPostInfo" HorizontalAlignment="Right" Margin="0,18.906,96,0" TextWrapping="Wrap" Text="140" VerticalAlignment="Top" Background="#00BC0000" Foreground="#FF009941" FontSize="13.333" FontWeight="Bold" BorderBrush="{x:Null}"/>
+                <Label x:Name="lblFollowers" Content="" HorizontalAlignment="Left" Margin="8,110.733,0,0" VerticalAlignment="Top" Foreground="White" FontSize="9.333"/>
+                <ListView x:Name="listviewFollowers" Margin="8,130,8,0" SelectionMode="Single" Background="#00000000" Foreground="White" BorderThickness="1" SelectionChanged="listviewFollowers_SelectionChanged" BorderBrush="#197F9DB9" Height="95" VerticalAlignment="Top" d:LayoutOverrides="GridBox">
+                	<ListView.ItemsPanel>
+        				<ItemsPanelTemplate>
+						           <WrapPanel  ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Hidden"></WrapPanel>
+						</ItemsPanelTemplate>
+					</ListView.ItemsPanel>
+                </ListView>
+                <TextBlock x:Name="txtUserLastPosts" TextWrapping="Wrap" Margin="8,226,8,8" Foreground="White" RenderTransformOrigin="0.5,0.5" d:LayoutOverrides="VerticalAlignment"/>
+            </Grid>
+            <Grid x:Name="UserDetailGrid" Margin="95,8,25,8" Visibility="Hidden">
+                <Canvas x:Name="cvUserDetailPlace" Background="#00FF0000">
+                    <Grid x:Name="boxUserDetail" Height="303" Canvas.Left="8" Canvas.Top="8" Width="410">
+                        <Rectangle Fill="#CC000000" Stroke="Black" RadiusX="15" RadiusY="15">
+                            <Rectangle.Effect>
+                                <DropShadowEffect BlurRadius="15"/>
+                            </Rectangle.Effect>
+                        </Rectangle>
+                        <TextBlock x:Name="txtUserDetail" Margin="8,8,0,8" TextWrapping="Wrap" Foreground="White" HorizontalAlignment="Left" Width="394"/>
+                        <Button x:Name="btnUserDetailClose" Content="Close" RenderTransformOrigin="0.5,0.5" Click="btnUserDetailClose_Click" Margin="0,8,8,0" HorizontalAlignment="Right" Width="63" VerticalAlignment="Top">
+                            <Button.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Button.RenderTransform>
+                        </Button>
+                    </Grid>
+                </Canvas>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

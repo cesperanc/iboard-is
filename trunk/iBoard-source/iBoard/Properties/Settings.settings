@@ -1,0 +1,44 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="iBoard.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="TwitterAccessTokenURL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://api.twitter.com/oauth/access_token</Value>
+    </Setting>
+    <Setting Name="TwitterConsumerKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">uhrQAh1sedVJ80WtxqfyOA</Value>
+    </Setting>
+    <Setting Name="TwitterAuthorizeURL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://api.twitter.com/oauth/authorize</Value>
+    </Setting>
+    <Setting Name="TwitterConsumerSecret" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Gx0twwl4g4U5HYOgJyCw8kuKmD2kn2EQTQX3znDYLKk</Value>
+    </Setting>
+    <Setting Name="TwitterRequestTokenURL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://api.twitter.com/oauth/request_token</Value>
+    </Setting>
+    <Setting Name="MoodleModuleUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/admin/report/uedws/</Value>
+    </Setting>
+    <Setting Name="DefaultMoodleServiceUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://ead.ipleiria.pt</Value>
+    </Setting>
+    <Setting Name="MoodleServiceUrlSettingName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">serviceUrl</Value>
+    </Setting>
+    <Setting Name="MoodleServiceUsernameSettingName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">username</Value>
+    </Setting>
+    <Setting Name="MoodleServiceAutorizationKeySettingName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">authorizationKey</Value>
+    </Setting>
+    <Setting Name="iBoardConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\Data\iBoard.mdf;Integrated Security=True;User Instance=True&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\Data\iBoard.mdf;Integrated Security=True;User Instance=True</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
