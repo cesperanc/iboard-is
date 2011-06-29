@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="admin/report/uedws/db" VERSION="20101114" COMMENT="XMLDB file for UEDWS tables"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="uedws_authentication" COMMENT="to store UEDWS authentication data"> 
+      <FIELDS> 
+        <FIELD NAME="id" TYPE="int" LENGTH="20" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="userid"/> 
+        <FIELD NAME="userid" TYPE="int" LENGTH="20" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="username"/> 
+        <FIELD NAME="username" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="userid" NEXT="autorizationkey"/> 
+        <FIELD NAME="autorizationkey" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="username" NEXT="deviceidentification"/> 
+        <FIELD NAME="deviceidentification" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" PREVIOUS="autorizationkey" NEXT="creationdate"/> 
+        <FIELD NAME="creationdate" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" PREVIOUS="deviceidentification" NEXT="lastaccess"/> 
+        <FIELD NAME="lastaccess" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" PREVIOUS="creationdate" NEXT="accesscount"/> 
+        <FIELD NAME="accesscount" TYPE="int" LENGTH="20" NOTNULL="false" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" PREVIOUS="lastaccess"/> 
+      </FIELDS> 
+      <KEYS> 
+        <KEY NAME="pk_id" TYPE="primary" FIELDS="id"/> 
+      </KEYS> 
+    </TABLE>
+  </TABLES>
+</XMLDB>

@@ -1,0 +1,8 @@
+<!-- 
+	This is the configuration file for the configuration classes generation from the Config.xml file using the xsd.exe tool from visual studio 
+	Usage example:
+		xsd Config.xsd /parameters:GenerateConfigClasses.xml
+-->
+<xsd xmlns='http://microsoft.com/dotnet/tools/xsd/' output='../Classes/Config/' nologo='true'>
+  <generateClasses language='CS' namespace='iBoard.Classes.Config' />
+</xsd>
