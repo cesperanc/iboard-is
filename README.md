@@ -8,16 +8,16 @@ The client is based on the Windows Presentation Foundation and .NET framework. T
 
 # Screenshots #
 ## Login screen ##
-<img src='http://iboard-is.googlecode.com/svn/wiki/images/01-login.jpg' alt='Image of the login screen' />
+![Image of the login screen](https://raw.githubusercontent.com/cesperanc/iboard-is/wiki/images/01-login.jpg)
 
 ## Add account screen ##
-<img src='http://iboard-is.googlecode.com/svn/wiki/images/02-add_account.jpg' alt='Image of the add account screen' />
+![Image of the add account screen](https://raw.githubusercontent.com/cesperanc/iboard-is/wiki/images/02-add_account.jpg)
 
 ## Account type selector screen ##
-<img src='http://iboard-is.googlecode.com/svn/wiki/images/03-add_account_type.jpg' alt='Image of the account type screen' />
+![Image of the account type screen](https://raw.githubusercontent.com/cesperanc/iboard-is/wiki/images/03-add_account_type.jpg)
 
 ## Moodle timeline screen ##
-<img src='http://iboard-is.googlecode.com/svn/wiki/images/05-moodle_timeline.jpg' alt='Image of the moodle timeline screen' />
+![Image of the moodle timeline screen](https://raw.githubusercontent.com/cesperanc/iboard-is/wiki/images/05-moodle_timeline.jpg)
 
 
 # Requirements #
